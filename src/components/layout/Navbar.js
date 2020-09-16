@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 function Navbar() {
     return (
@@ -12,9 +13,9 @@ function Navbar() {
             <ul className="navbar-nav mr-auto"></ul>
             <ul className="navbar-nav align-items-center">
               <li className="nav-item">
-                <a href="#!" className="btn btn-primary mr-3">
-                  Add Employ
-                </a>
+                <Link to="/EmployForm" className="btn btn-primary mr-3">
+                  Add Employee
+                </Link>
               </li>
               <li className="nav-item dropdown">
                 <a
@@ -24,7 +25,7 @@ function Navbar() {
                   data-toggle="dropdown"
                 >
                    <img src={require("../../assests/myimg.jpeg")} height="35px"/>
-                  <span className="ml-2 navbar-text">Subroto Biswas</span>
+                  <span className="ml-2 navbar-text">Ayush khaskalam</span>
                 </a>
                 <div className="dropdown-menu">
                   <a className="dropdown-item" href="!#">

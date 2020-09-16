@@ -1,7 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-
+import { Link , useParams } from 'react-router-dom'
+import Avatar from "../layout/Avatar";
 function Employdetail() {
+  const {id} = useParams();
     return (
       <div className="container">
       <div className="py-4">
@@ -10,7 +11,7 @@ function Employdetail() {
             <div className="card card-body shadow">
               <div className="row">
                 <div className="col-md-4">
-                 STUDENT PROFILE PICTURE 
+                <Avatar url="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSy1nMGEWTUcN6GJX1gJAmZxMcGihLeE2zwvg&usqp=CAU"/>   
                 </div>
                 <div className="col-md-8">
                   <ul className="list-group">
@@ -18,7 +19,7 @@ function Employdetail() {
                       className="d-flex justify-content-between align-items-center list-group-item list-group-item-action"
                     >
                       <h3 className="m-0">EMPLOYEE NAME</h3>
-                      <Link to="/EmployForm" className="btn btn-primary" href="!#">
+                      <Link to={`/EmployForm/${id}`} className="btn btn-primary" href="!#">
                         edit profile
                       </Link>
                     </li>
