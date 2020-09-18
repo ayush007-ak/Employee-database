@@ -1,10 +1,12 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
 import Avatar from "../layout/Avatar";
-import { useFirestoreConnect } from 'react-redux-firebase';
+import { useFirestoreConnect , useFirestore } from 'react-redux-firebase';
 import {useSelector} from 'react-redux';
 const Employees = () => {
 
+
+   const firestore = useFirestore();
    const Employees = useSelector(state => state.firestore.ordered.Employees);
    console.log(Employees)
 
@@ -17,6 +19,20 @@ const Employees = () => {
   if(!Employees){
     return <h1>loading...</h1>
   }
+
+
+
+    const deleteEmployees = async (id) =>{
+      try{
+       await firestore.collection("Employees").doc(id).delete()
+      }catch(error){
+        console.log("error" + error)
+      }
+    } 
+
+
+
+
     return (
         <div className="container">
   <div className="py-4">
@@ -33,7 +49,7 @@ const Employees = () => {
             <Link to={`/Employdetail/${Employee.id}`} className="btn btn-primary btn-profile">
              view profile
             </Link>
-            <button className="btn btn-edit">
+            <button className="btn btn-edit" onClick={() => deleteEmployees(Employee.id)}>
               <span className="material-icons">delete_outline</span>
             </button>
           </div>

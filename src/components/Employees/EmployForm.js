@@ -1,10 +1,14 @@
-import React, {useState} from 'react'
-import {useParams} from 'react-router-dom';
+import React, {useState, useEffect} from 'react'
+import {useParams , useHistory} from 'react-router-dom';
 import Input from '../layout/Input';
+import {useFirestore} from 'react-redux-firebase';
 
 
 function EmployForm() {
-    const {id} = useParams();
+  let history = useHistory()
+  const firestrore = useFirestore();
+   const {id} = useParams();
+   const docRef = id? firestrore.collection("Employees").doc(id): null;
     const [employee , setEmployee]= useState({
        name:"",
        email:"",
@@ -18,14 +22,36 @@ function EmployForm() {
         setEmployee({...employee,[e.target.name]: e.target.value})
     }
 
-   const submitForm = e => {
+    useEffect(() => {
+      if(id){
+        loadEmployee();
+      }
+    }, [id]);
+
+    const loadEmployee = async () => {
+     try{
+     
+      const result = await docRef.get();
+      if(result.exists){
+        setEmployee(result.data())
+      }else{
+        console.log("no such employee");
+        alert("NO such Employee")
+      }
+     }catch (error){
+      console.log("Error: ", error);
+     }
+    };
+
+   const submitForm =async e => {
     e.preventDefault();
 
     if(id){
-      alert("updated")
+      await docRef.update({...employee, updatedAt:firestrore.FieldValue.serverTimestamp()})
     }else{
-      alert("add hogya")
+      firestrore.collection("Employees").add({...employee,createdAT:firestrore.FieldValue.serverTimestamp()})
     }
+    history.push("/")
    }
 
     return (
