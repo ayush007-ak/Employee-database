@@ -4,7 +4,7 @@ import {isLoaded , isEmpty} from 'react-redux-firebase';
 import {useSelector} from 'react-redux';
 
 import Loading from '../layout/Loading';
-import LOading from '../layout/Loading';
+
 const PrivateRoute = ({component: Component, ...rest}) => {
     const auth = useSelector(state =>state.firebase.auth);
     if(!isLoaded(auth)) {

@@ -2,6 +2,7 @@ import React, {useState , useEffect} from 'react'
 import { Link , useParams } from 'react-router-dom'
 import Avatar from "../layout/Avatar";
 import {useFirestore} from 'react-redux-firebase';
+import Loading from '../layout/Loading';
 function Employdetail() {
   const {id} = useParams();
 
@@ -28,7 +29,7 @@ function Employdetail() {
 
   
   if(!Employee){
-    return <h1>loading...</h1>
+    return <Loading/>
   }
     return (
       <div className="container">
