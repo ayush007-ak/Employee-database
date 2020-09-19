@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import Avatar from "../layout/Avatar";
 import { useFirestoreConnect , useFirestore } from 'react-redux-firebase';
 import {useSelector} from 'react-redux';
+import Loading from '../layout/Loading';
 const Employees = () => {
 
 
@@ -13,11 +14,12 @@ const Employees = () => {
   useFirestoreConnect([
     {
  collection: "Employees",
+ orderBy:["createdAt", "desc"],
     },
   ]);
 
   if(!Employees){
-    return <h1>loading...</h1>
+    return <Loading/>
   }
 
 

@@ -9,6 +9,8 @@ import EmployForm from './components/Employees/EmployForm';
 import {Provider} from 'react-redux';
 import store, {rrfProps} from './store';
 import {ReactReduxFirebaseProvider} from 'react-redux-firebase';
+import  Login  from './components/pages/Login';
+import PrivateRoute from './components/Routes/PrivateRoute';
 
 
 function App() {
@@ -18,13 +20,14 @@ function App() {
 
 <BrowserRouter>
 <div className="App">
-<Navbar/>
-<Switch>
-<Route exact path ="/"component={Employees}/>
-<Route exact path="/Employdetail/:id" component={Employdetail}/>
-<Route exact path="/EmployForm/:id?" component={EmployForm}/>
-</Switch>
+<PrivateRoute component={Navbar}/>
 
+<Switch>
+<PrivateRoute exact path ="/"component={Employees}/>
+<PrivateRoute exact path="/Employdetail/:id" component={Employdetail}/>
+<PrivateRoute exact path="/EmployForm/:id?" component={EmployForm}/>
+<Route exact path= "/Login" component={Login}/>
+</Switch>
 </div>
 </BrowserRouter>
 
